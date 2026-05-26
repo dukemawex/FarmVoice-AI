@@ -1,0 +1,32 @@
+name: Test
+
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      - name: Backend install
+        working-directory: farmvoice-backend
+        run: npm ci
+
+      - name: Backend tests
+        working-directory: farmvoice-backend
+        run: npm test
+
+      - name: Frontend install
+        working-directory: farmvoice-frontend
+        run: npm ci
+
+      - name: Frontend build
+        working-directory: farmvoice-frontend
+        run: npm run build
