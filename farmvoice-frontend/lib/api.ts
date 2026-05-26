@@ -27,7 +27,7 @@ export async function startChat(input: {
   language?: LanguageCode;
   mediaUrl?: string;
 }) {
-  return request<{ reply: string; conversation_id: string; intent: string; suggested_follow_ups: string[] }>('/.netlify/functions/chat', {
+  return request<ChatResponse>('/.netlify/functions/chat', {
     method: 'POST',
     body: JSON.stringify({
       message: input.message,
